@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Gold Chat - The ultimate Social Experience</title>
+	<link rel="stylesheet" href="/css/bootstrap.css" /> {{!--link bootstrap.css stylesheet --}}
+	<link rel="stylesheet" href="/css/style.css" /> {{!--link style.css styesheet --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">{{!--link font awesme stylesheet for website fonts --}}
+  
+</head>
+<body>
+	<div class="container">
+      <div class="header clearfix">
+        <nav id="reload">
+          <ul class="nav nav-pills pull-right">
+            {{#if user}}
+              <input type="hidden"  id="currentuser" value="{{user.username}}">
+              <li role="presentation"><a href="/location">Location services</a></li>
+              <li role="presentation"><a href="/search">Search <i class="fa fa-search"></i></a></li>
+              <li>
+                <div class="dropdown" style="">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><i class="fa fa-user-plus"></i>
+                <span class="caret"></span></button>
+                  <ul class="dropdown-menu" style="width: 350px; height: 500px; overflow-y: scroll;">
+                    {{#if user.request}}
+                    {{#each newfriend}}
+                    <li style="border-bottom: 3px solid mediumblue">
+                      <a href="#">
+                          <div>
+                            <h4>{{this.username}}</h4>
+                          </div>
+                          <div>
+                              
+                              <div style="width: 40%; display: outline;">
+                                <input type="hidden" name="senderId" id="senderId" value="{{this.userId}}">
+                                <input type="hidden" name="senderName" id="senderName" value="{{this.username}}">
+                                <button type="submit" id="accept_friend" class="btn btn-primary" style="width: 8em">Accept</button>
+                              </div>
+                              <div style="width: 50%;  display: inline;">
+                                 <input type="hidden" name="user_Id" id="user_Id" value="{{this.userId}}">
+                                <button type="submit" id="cancel_friend" class="btn btn-primary" style="width: 8em">Cancel</button>
+                              </div>
+                          </div>    
+                      </a>
+                    </li>
+                    {{/each}}
+                    {{else}}
+                    <div>
+                      <h4 style="text-align:center">No requests</h4>
+                    </div>
+                    {{/if}}
+                  </ul>
+                </div>
+              </li>
+              <li role="presentation"><a href="/users/logout">Logout</a></li> {{!--adds link to the logout button, also ensures it matches the presenation of the page --}}
+            {{else}}
+              <li role="presentation"><a href="/users/login">Login</a></li>{{!--same as above for the login section --}}
+              <li role="presentation"><a href="/users/register">Register</a></li> {{!--same as above for the register section --}}
+            {{/if}}
+          </ul>
+        </nav>
+        <div class="container-fluid">
+
+
+<a href="/" title="Gold Chat - The ultimate Social Experience"><img src="../upload/goldchat.png"></a>
+</div>
+        {{!--adds link for local host so the webpage will be shown when searching for the localhost8000 page --}}  {{!--also link to dislay the image selected as your user profile picture --}}
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          {{#if success_msg}}
+            <div class="alert alert-success">{{success_msg}}</div>
+          {{/if}}
+
+          {{#if error_msg}}
+            <div class="alert alert-danger">{{error_msg}}</div>
+          {{/if}}
+
+          {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+          {{/if}}
+          
+          {{{body}}}
+        </div>
+
+        
+      </div>
+
+      <footer class="footer">
+        <p> Created by Dylan Holden</p>
+      </footer>
+
+    </div> <!-- /container -->
+    
+</body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script> {{!--links socket.io to application --}}
+  <script type="text/javascript" src="/js/sendrequest.js"></script> {{!--links sendrequest.js to the layout of the page --}}
+  <script type="text/javascript">
+  
+  </script>
+</html>

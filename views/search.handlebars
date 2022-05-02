@@ -1,0 +1,21 @@
+{{!--layout for the searching section of the application --}}
+
+<h2>Find Friends or Conect With Old</h2>
+<form action="/search" method="post">
+    <input type="text" name="searchfriend" placeholder="username">
+    <input type="submit" value="search">
+</form>
+<hr>
+
+{{#each result}}
+    <div class="usercard col-lg-3">
+        <img class="usercard-image" src="../upload/{{this.userImage}}">
+        <h4 class="usercard-name">{{this.name}}</h4>
+        <p class="usercard-username">@({{this.username}})</p>
+        <form action="" method="get" class="add_friend">
+            <input type="hidden" name="receiverName" class="receiverName" value="{{this.username}}">
+            <input type="hidden" name="sender-name" class="sender-name" value="{{user.username}}">
+            <button type="submit" id="" onclick="addFriend('{{this.username}}')" class="btn add accept friend-add"><i class="fa fa-user"></i> Add Friend</button>
+        </form>
+    </div>
+{{/each}}

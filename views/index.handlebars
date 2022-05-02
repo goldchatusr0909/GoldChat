@@ -1,0 +1,35 @@
+{{!--layout for Home page --}}
+
+<h2 class="page-header">Welcome Back: <b>{{user.name}} {{user.lastname}}</b></h2> 
+ 
+
+<div class="grid">
+    <div class="grid-item"><div style="absolute;right : 30%">
+      <img class="profilestyle" src="/upload/{{user.userImage}}" alt="{{user.userImage}}">
+      <form action="/" enctype="multipart/form-data" method="post" style="margin-top: 50px">
+          <label class="custombutton" id="custombutton" style="width:200px;border: 1px solid #ccc;display: inline-block; padding: 6px 12px;cursor: pointer;">
+              <input type="file" name="upload" accept="image/*" style=" display: none;" onchange="document.getElementById('custombutton').style.border = '2px solid lightgreen'">
+              Upload new image
+              </label>
+          <input type="submit" value="Upload" style="border: 0px solid #2d2d2d ; padding: 6px 12px; cursor: pointer; background-color: lightgrey; color: #darkgrey">
+          </form>
+ </div>
+</div>
+    <div class="grid-item">
+ <div style="text-align: center;">
+    
+     <h3 style="color: #fff; background-color: #55a7b3; padding: 20px; border-radius: 2px; border: 2px solid #55a7b3"> Your Friends</h3> <p>Connect with your friends today!</p>
+     
+     
+     {{#each user.friendsList}}
+         <p>
+             {{this.friendName}}
+         </p>
+     {{/each}}
+ </div>
+</div>
+ 
+</div>
+
+
+
