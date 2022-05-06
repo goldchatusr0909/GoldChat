@@ -49,8 +49,8 @@ var socketIO = require('socket.io'); // enables bidirectional communication (ena
 // //configure AWS enviroment
 
 // AWS.config.update({
-//     accessKeyId: "AKIAYAEG4HN6XYXQFJCB",
-//     secretAccessKey:"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 "
+//     accessKeyId: 
+//     secretAccessKey
 // });
 
 // var s3 = new AWS.S3();
