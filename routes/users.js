@@ -23,18 +23,21 @@ router.get('/register', function (req, res) {
 
 // sends registration information to the register page, specifying the input of each field from the database, i.e. the var name will be made equal to req.body.name.
 router.post('/register', function (req, res) {
-    var name = req.body.name;
+    globalThis.Name = req.body.name;
     var lastname = req.body.lastname;
     var email = req.body.email;
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
-    var location = req.body.location;
+    // var location = req.body.location;
+
+    
+    
 
     // checks to see if each registration field is comlpete, aswell as making sure that your passwords match
     req.checkBody('name', 'Name is required').notEmpty(); // if a name has not been entered then the message 'name is required' will be displayed in the designated text box. also designating the box as not empty.
 
-    req.checkBody('lastname', 'last name is required').notEmpty();
+    req.checkBody('lastname', 'last name is required').notEmpty(); // check the last name field for the above reason.
 
     req.checkBody('email', 'Email is required').notEmpty(); // the same as above expect using an email address
 
@@ -73,7 +76,7 @@ router.post('/register', function (req, res) {
                     });
                 } else {
                     var newUser = new User({  //if all the details enetered meet the requirements and no errors are thrown then a new user will be created with the name, username, email and password stored in the database.
-                        name: name,
+                        name: Name,
                         lastname: lastname,
                         email: email,
                         username: username,
@@ -96,10 +99,7 @@ router.get('/login', function (req, res) {
     res.render('login');
 });
 
-// router.get('/location.hmtl', function (req, res){
-//     res.render('/location.hmtl')
-// })
-//
+
 passport.use(new LocalStrategy( // authenticate the username when it has been entered
     function (username, password, done) {
         User.getUserByUsername(username, function (err, user) {

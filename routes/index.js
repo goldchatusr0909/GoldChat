@@ -16,14 +16,20 @@ var path = require('path');
 var async = require('async'); // provides functions that make it easier to use asynchronous javascript (code that executs immediatley instead of waiting for the current execution to finish
 //before running the next).
 
+var unirest = require('unirest'); // unirest is used in the creation of rest APIs and in making rest requests for http.
+
+var http = require('http'); //examines incoming and outgoing requests to help decide what to do.
+
+var fs = require('fs'); //fs is used in this instance so client side js files can be inluded in node.js files as modules aswell as allowing node.js modules to be used in client js.
+
 //before rendering the index page router.get requests data from the database to ensure that you are authenticated to be on or see what is on the specified page.
 router.get('/', ensureAuthenticated, function (req, res) {
-
+    
     res.render('index', {
-        newfriend: req.user.request // if authentication is successful then this should render and allow you to see the friend requests dropdown mennu.
+        newfriend: req.user.request, // if authentication is successful then this should render and allow you to see the friend requests dropdown mennu.
+        
     });
 });
-
 
 //checks the search function to make sure the user is allowed to use it.
 router.get('/search', ensureAuthenticated, function (req, res) {
@@ -231,8 +237,52 @@ router.post('/search', ensureAuthenticated, function (req, res) {
     });
 });
 
-router.get('/location', function (req, res){
-    res.render("location.handlebars")
+
+
+router.get('/location', function (req, res){ // the below IP retrieval and coordinates push is contained in the get location function so it happens upon loading the location page and not on app launch to increase speeds.
+
+let location = {
+
+    location: []
+
+} // creates a location object containing a location array to store geocoordinates
+    
+
+
+
+http.get({'host': 'api.ipify.org', 'port': 80, 'path': '/'}, function(resp) {
+    resp.on('data', function(ip) {
+      console.log("My public IP address is: " + ip); // display your devices public IP in the command line.
+      const ipLocation = []; // creaete an ipLocation array.
+
+      const axios = require('axios'); // require the axios module for using a geolocation api in node.js
+
+      async function getIpInfo (){
+         // Set endpoint and your access key
+          const pubIp = ip;
+          const accessKey = '838e8bea-f2c2-4502-a7c2-f87050cf6281';
+          const url = 'https://apiip.net/api/check?ip='+ pubIp +'&accessKey='+ accessKey;
+  // Make a request and store the response
+  const response = await axios.get(url);
+  const result = response.data;
+
+  // display the latitude and longitude parameters from the IP results.
+  console.log(result.latitude, result.longitude);
+
+  location.location.push([result.longitude, result.latitude]); //push the lat/lng coords into the location array created above
+  console.log(location);
+
+  fs.writeFileSync(path.resolve(__dirname, 'location.json'), JSON.stringify(location)); // use the fs module to write the lat/lng coords array and object into a locations.json file for storing in a mongodb database.
+
+};
+getIpInfo(); // call to get the ip information from the device
+      
+    });
+
+
+  });
+    
+    res.render("location.handlebars") // render the location handerbars file so the location page can match the sites layout.
 })
 
 //form for uploading a new user profile image.

@@ -3,17 +3,17 @@
     "version": "0.0.0",
     "main": "app.js",
     "scripts": {
-        "start": "nodemon app.js"
+        "start": "node app.js"
     },
     "dependencies": {
         "@handlebars/allow-prototype-access": "^1.0.5",
+        "apiip.net": "^1.2.1",
         "async": "^2.6.1",
-        "aws-sdk": "^2.1125.0",
+        "axios": "^0.27.2",
         "bcryptjs": "*",
         "body-parser": "*",
         "connect-flash": "*",
         "cookie-parser": "^1.4.1",
-        "ejs": "^3.1.7",
         "exphbs": "^1.2.0",
         "express": "^4.17.3",
         "express-handlebars": "*",
@@ -31,6 +31,7 @@
         "passport-http": "*",
         "passport-local": "*",
         "path": "^0.12.7",
-        "socket.io": "^4.4.1"
+        "socket.io": "^4.4.1",
+        "unirest": "^0.6.0"
     }
 }

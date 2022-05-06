@@ -1,6 +1,3 @@
-//const browserifyShim = require("browserify-shim");
-// const fileSystem = require("browserify-fs");
-
 var gmapController = (function () {
              
     function initialize() {
@@ -47,30 +44,18 @@ var gmapController = (function () {
           
     function displayPosition(pos) {
         let coords = pos.coords; 
-        // var latX = coords.latitude;
-        // var longX = coords.longitude;
           
         addMap(coords); //add lat and long coordinates to the map so you can see your current position.
         //console.log(coords);    
     
-        geoCoords.push([coords.latitude, coords.longitude]);
-                // window.sessionStorage.setItem(
-                //     "geoCoords", 
-                //     JSON.stringify(geoCoords) 
-                //     );
+        geoCoords.push([coords.latitude, coords.longitude]); // push latitute and longitude coordinates into the geoCoords array
+                window.localStorage.setItem(
+                    "geoCoords", 
+                    JSON.stringify(geoCoords) 
+                    );
                     
-        //console.log(geoCoords);
-
-        // const myJSONString = JSON.stringify(geoCoords);
-        // console.log(myJSONString);
-
-
-       
-
-                    
-
-                    
-    }
+        console.log(geoCoords);
+     }
           
     function displayError(msg) {
         $("#errorArea").removeClass("d-none");
@@ -79,11 +64,11 @@ var gmapController = (function () {
           
     function addMap(location) {
         var i;
-        for(i = 0; i < geoCoords.length; i++){
+        for(i = 0; i < geoCoords.length; i++){ // place a marker on the first instance of coords in the array
         let pos = new google.maps.LatLng(geoCoords[i][0], geoCoords[i][1]); // Create a lat/lng object to store the latitude and longitude values.
         
         if( i > 2){
-            localStorage.clear();
+            localStorage.clear(); // if the amount of coords in the array exceeds two then it will clear
         }
 
         // Create map options
@@ -99,23 +84,14 @@ var gmapController = (function () {
         marker = new google.maps.Marker({
             position: pos, //place a marker on user coordinates
             title: "You are here",
-            animation: google.maps.Animation.DROP,
+            animation: google.maps.Animation.DROP, //enables a drop down animation on the marker when the page loads
             optimized: true,
-            draggable: true
+            draggable: true //enables the displayed marker to be dragable
 
 
             
         })
         locMarkers.push(marker);
-        //console.log("Markers", marker);
-
-        // locMarkers.push([marker.position]);
-        // window.localStorage.setItem(
-        //     "markers",
-        //     JSON.stringify(marker)
-        //     );
-
-        //     console.log(marker);
         
          marker.setMap(map);
          

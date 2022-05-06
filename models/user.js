@@ -45,80 +45,7 @@ var UserSchema = mongoose.Schema({
 	totalRequest: {
 		type: Number, default:0 // the number 0 will increase as the amount of valid users on your friend list increases.
 	},
-	location: {
-		type: {
-		  type: String, 
-		  enum: ['Point'], 
-		  required: true
-		},
-		coordinates: {
-		  type: [Number],
-		  required: true
-		}
-	  }
-
-	
-	
-
-
-	
-	
 });
-UserSchema.index({location: '2dsphere'});
-
-// var fs = require('fs');
-//     var fileName = './data.json';
-//     var file = require(fileName);
-
-//     file.key = "new value";
-
-//     fs.writeFile(fileName, JSON.stringify(file), function writeJSON(err){
-//         if (err) return console.log(err);
-//         console.log(JSON.stringify(file));
-//         console.log('writing to' + fileName);
-
-        
-//     });
-
-// var geoController = require('./scripts/geoController');
-// var geoMap = require('./scripts/geoMap');
-
-// var locationSchema = mongoose.Schema({
-// 	loc: {
-// 		type: { type: String},
-// 		coordinates: []
-// 	}
-
-// });
-
-// locationSchema.index({ "loc": "2dsphere"});
-
-// var Locschema = mongoose.model( "Locschema", locationSchema);
-
-// 	var locschema = new Locschema({
-// 		"loc": {
-// 			"type": "Point",
-// 			"coordinates": [coords.longitude, coords.latitude]
-// 		}
-// 	})
-
-
-// Locschema.aggregate(
-// 	[
-// 		{	"$geoNear": {
-// 			"near": {
-// 				"type": "Point",
-// 				"coordinates": [coords.longitude, coords.latitude]
-// 			},
-// 			"distanceField": "distance",
-// 			"spherical": true,
-// 			"maxDistance": 1000
-// 		}}
-// 	],
-// 	function(err, results){
-
-// 	}
-// )
 
 
 
@@ -152,6 +79,3 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
     	callback(null, isMatch); // if they do match then no error is thrown, allowing a user to continue using the application.
 	});
 }
-
-// app.use('/geoController', geoController); // initialize the use of the routes and users folders and files respectivley.
-// app.use('/geoMap', geoMap);

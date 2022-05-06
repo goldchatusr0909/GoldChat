@@ -35,20 +35,17 @@ var mongo = require('mongodb'); // document oriented database program, NoSQL mea
 var mongoose = require('mongoose'); // manages the relationships between different data, as well as providing schema validation. ("the problem that mongoose aims to solve is allowing developers to enforce a specific schema 
 //at the application layer").
 
-//db config 
-//const database = require('./config/keys').MongoURI;
+var unirest = require('unirest');
 
-//connect to Mongo
-// mongoose.connect(database, { useNewUrlParser: true })
-// .then(() => console.log('MongoDB Connected...'))
-// .catch(err => console.log(err));
+
+
+
 
 var socketIO = require('socket.io'); // enables bidirectional communication (enables more than 2 people to have a conversation, i.e.previosuly created chat application)
 
-// var AWS = require('aws-sdk');
-// var fs = require('fs');
 
 
+//-----atttempt at configuring an AWS (amazon web servive) enviroment bucket for storing static files such as images.------------------------------------------------
 // //configure AWS enviroment
 
 // AWS.config.update({
@@ -79,10 +76,9 @@ var socketIO = require('socket.io'); // enables bidirectional communication (ena
 //     }
 //   });
 
-
-
-
-
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+const User = require('./routes/users'); // require the users.js file from the routes folder
+const fs = require('fs'); // require the fs module for the app.js file
 
 mongoose.connect('mongodb+srv://djh783:Cococookie100@cluster0.mfl9z.mongodb.net/Cluster0?retryWrites=true&w=majority'); //allows for immediate use of models wihtout waiting for mongoose to establish a connection.
 var db = mongoose.connection;
@@ -169,6 +165,7 @@ app.use(function (req, res, next) {
 
 app.use('/', routes); // initialize the use of the routes and users folders and files respectivley.
 app.use('/users', users);
+
 
 // Set the localHost to listn on port 8080, if you search for localhost:8080 in a web browser with the application 
 //running, you would be able to use and interact with it freely. although only on the running device.

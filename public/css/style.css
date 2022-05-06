@@ -34,7 +34,7 @@ body {
 /* Customize container */
 @media (min-width: 1200px) {
   .container {
-    max-width: 1200px;
+    max-width: 1060px;
   }
 }
 .container-narrow > hr {
@@ -141,9 +141,6 @@ footer{
 .reject, .locAlert {
   background-color: red; color: white;
 }
-
-
-/* .alert {  margin-top: 1em;  margin-bottom: 1em;  padding: 1em;  background-color: red;  color: white;} */
 .d-none { display: none; }
 
 .mapArea { width: 95%;  height: 600px; 

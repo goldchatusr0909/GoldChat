@@ -6764,3 +6764,13 @@ button.close {
   grid-template-rows: 1fr;
   column-gap: 10px;
 }
+
+@media (max-width: 767px) {
+  .grid {
+      display: inline !important
+  }
+
+  @media (max-width: 767px){
+  .test1 {
+    margin-top: 50px;}  }
+  }

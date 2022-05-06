@@ -1,7 +1,7 @@
 {{!--layout for Home page --}}
 
 <h2 class="page-header">Welcome Back: <b>{{user.name}} {{user.lastname}}</b></h2> 
- 
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <div class="grid">
     <div class="grid-item"><div style="absolute;right : 30%">
@@ -15,7 +15,7 @@
           </form>
  </div>
 </div>
-    <div class="grid-item">
+    <div class="grid-item test1">
  <div style="text-align: center;">
     
      <h3 style="color: #fff; background-color: #55a7b3; padding: 20px; border-radius: 2px; border: 2px solid #55a7b3"> Your Friends</h3> <p>Connect with your friends today!</p>
@@ -23,7 +23,7 @@
      
      {{#each user.friendsList}}
          <p>
-             {{this.friendName}}
+             {{this.friendName}}  {{!--if a user is on your friends list in the database then their name will be displayed in the list. --}}
          </p>
      {{/each}}
  </div>
