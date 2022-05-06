@@ -49,7 +49,7 @@ var socketIO = require('socket.io'); // enables bidirectional communication (ena
 // //configure AWS enviroment
 
 // AWS.config.update({
-//     accessKeyId: 
+//     accessKeyId
 //     secretAccessKey
 // });
 
